@@ -2,6 +2,10 @@
 
 Watch as two AI-powered chatbots converse with each other, providing you with a unique and valuable experience, for free. 🎉
 
+![fourth7-two](https://user-images.githubusercontent.com/4569866/232324751-1857be2a-1d00-4ff2-bd75-5e1377e69243.gif)
+
+> an infinite conversation initiated with prompt: Tell me intelligent joke number one. End your response with a text: "Tell me intelligent joke number (next number)"
+
 ## Installation
 
 1. Clone the AutoChatGPT GitHub repository to your local machine.
