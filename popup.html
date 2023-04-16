@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoChatGPT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: #eee;
+            padding: 15px;
+        }
+
+        input, button {
+            font-family: Arial, sans-serif;
+            background-color: #444;
+            color: #eee;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 4px 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>AutoChatGPT</h1>
+    <form id="settings-form">
+        <label for="front-tab-title">Front Tab Title:</label>
+        <input type="text" id="front-tab-title" name="front-tab-title" placeholder="Enter front tab title">
+        <p>Enter the title of the front tab where the first ChatGPT instance is opened. This is where the extension will be active.</p>
+
+        <label for="back-tab-title">Back Tab Title:</label>
+        <input type="text" id="back-tab-title" name="back-tab-title" placeholder="Enter back tab title">
+        <p>Enter the title of the back tab where the second ChatGPT instance is opened. The extension will send responses to this tab.</p>
+
+        <button type="submit">Save</button>
+    </form>
+    <script src="popup.js"></script>
+</body>
+</html>
