@@ -1,6 +1,6 @@
 {
     "name": "3AutoChatGPT",
-    "version": "1.0",
+    "version": "1.0.1",
     "description": "An extension to orchestrate conversations between two tabs using ChatGPT",
     "manifest_version": 2,
     // "icons": {

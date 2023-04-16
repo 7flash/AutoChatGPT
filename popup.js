@@ -14,7 +14,7 @@ function saveOptions() {
   chrome.storage.sync.set({ frontTabTitle, backTabTitle });
 }
 
-document.getElementById('options-form').addEventListener('submit', (event) => {
+document.getElementById('settings-form').addEventListener('submit', (event) => {
   event.preventDefault();
   saveOptions();
 });
