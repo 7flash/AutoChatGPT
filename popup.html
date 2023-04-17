@@ -12,6 +12,10 @@
             padding: 15px;
         }
 
+        form {
+          width: 300px;
+        }
+
         input, button {
             font-family: Arial, sans-serif;
             background-color: #444;
@@ -19,7 +23,8 @@
             border: 1px solid #555;
             border-radius: 4px;
             padding: 4px 8px;
-            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         button {
@@ -34,19 +39,39 @@
             display: block;
             margin-bottom: 4px;
         }
+
+        .field {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <h1>AutoChatGPT</h1>
     <form id="settings-form">
-        <label for="front-tab-title">Front Tab Title:</label>
-        <input type="text" id="front-tab-title" name="front-tab-title" placeholder="Enter front tab title">
-        <p>Enter the title of the front tab where the first ChatGPT instance is opened. This is where the extension will be active.</p>
-
-        <label for="back-tab-title">Back Tab Title:</label>
-        <input type="text" id="back-tab-title" name="back-tab-title" placeholder="Enter back tab title">
-        <p>Enter the title of the back tab where the second ChatGPT instance is opened. The extension will send responses to this tab.</p>
-
+        <div class="field">
+            <label for="front-tab-title">Front Tab Title:</label>
+            <input type="text" id="front-tab-title" name="front-tab-title" placeholder="Enter front tab title">
+        </div>
+        <div class="field">
+            <label for="back-tab-title">Back Tab Title:</label>
+            <input type="text" id="back-tab-title" name="back-tab-title" placeholder="Enter back tab title">
+        </div>
+        <div class="field">
+            <label for="front-prefix">Front Prefix:</label>
+            <input type="text" id="front-prefix" name="front-prefix" placeholder="Enter front prefix">
+        </div>
+        <div class="field">
+            <label for="front-suffix">Front Suffix:</label>
+            <input type="text" id="front-suffix" name="front-suffix" placeholder="Enter front suffix">
+        </div>
+        <div class="field">
+            <label for="back-prefix">Back Prefix:</label>
+            <input type="text" id="back-prefix" name="back-prefix" placeholder="Enter back prefix">
+        </div>
+        <div class="field">
+            <label for="back-suffix">Back Suffix:</label>
+            <input type="text" id="back-suffix" name="back-suffix" placeholder="Enter back suffix">
+        </div>
         <button type="submit">Save</button>
     </form>
     <script src="popup.js"></script>

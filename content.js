@@ -1,4 +1,11 @@
-let backTabTitle = null;
+let settings = {
+  "frontTabTitle": "",
+  "backTabTitle": "",
+  "frontPrefix": "",
+  "frontSuffix": "",
+  "backPrefix": "",
+  "backSuffix": "",
+};
 
 async function getCompletedReadyState() {
   return new Promise((resolve) => {
@@ -54,30 +61,32 @@ async function waitResponse() {
 }
 
 async function handleClick(event) {
-  const prompt = await waitResponse();
+  const frontResponse = await waitResponse();
 
-  if (prompt) {
-    const response = await sendMessageToBackground({
-      action: "findTabByTitle",
-      targetTitle: backTabTitle,
+  const backPrompt =
+    `${settings.backPrefix}\n ${frontResponse} \n${settings.backSuffix}`;
+
+  const backTab = await sendMessageToBackground({
+    action: "findTabByTitle",
+    targetTitle: settings.backTabTitle,
+  });
+
+  if (backTab.success) {
+    const backResponse = await sendMessageToBackground({
+      action: "generateResponse",
+      prompt: backPrompt,
+      tabId: backTab.tabId,
     });
 
-    if (response.success) {
-      const generatedResponse = await sendMessageToBackground({
-        action: "generateResponse",
-        prompt: prompt,
-        tabId: response.tabId,
-      });
-
-      if (generatedResponse && generatedResponse.success) {
-        writePrompt(generatedResponse.response);
-        submitPrompt();
-      } else {
-        console.error("Failed to generate response");
-      }
+    if (backResponse && backResponse.success) {
+      const frontPrompt = `${settings.frontPrefix}\n ${backResponse.response} \n${settings.frontSuffix}`
+      writePrompt(frontPrompt);
+      submitPrompt();
     } else {
-      console.error("Target tab not found");
+      console.error("Failed to generate response");
     }
+  } else {
+    console.error("Target tab not found");
   }
 }
 
@@ -97,10 +106,12 @@ function writePrompt(text) {
   const textarea = document.getElementsByTagName("textarea")[0];
   textarea.focus();
   textarea.value = text;
-  textarea.dispatchEvent(new Event("input", {
-    bubbles: true,
-    cancelable: true,
-  }));
+  textarea.dispatchEvent(
+    new Event("input", {
+      bubbles: true,
+      cancelable: true,
+    }),
+  );
 }
 
 function handleMessageFromBackground(message, sender, sendResponse) {
@@ -123,14 +134,15 @@ function handleMessageFromBackground(message, sender, sendResponse) {
   const selectedTabBtn = "div > a.bg-gray-800 > div.absolute";
   await waitElement(selectedTabBtn);
 
-  chrome.storage.sync.get(["frontTabTitle", "backTabTitle"], async (result) => {
+  chrome.storage.sync.get(Object.keys(settings), async (result) => {
+    settings = { ...result };
     const currentTabTitle =
       document.querySelector(selectedTabBtn).previousElementSibling.innerText;
-    if (result.frontTabTitle === currentTabTitle) {
+    if (settings.frontTabTitle === currentTabTitle) {
       const form = document.querySelector("form");
       form.addEventListener("submit", handleClick);
       backTabTitle = result.backTabTitle;
-    } else if (result.backTabTitle == currentTabTitle) {
+    } else if (settings.backTabTitle == currentTabTitle) {
       chrome.runtime.onMessage.addListener(handleMessageFromBackground);
     }
   });
