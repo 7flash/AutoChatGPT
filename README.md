@@ -2,9 +2,11 @@
 
 Watch as two AI-powered chatbots converse with each other, providing you with a unique and valuable experience, for free. 🎉
 
-![fourth7-two](https://user-images.githubusercontent.com/4569866/232324751-1857be2a-1d00-4ff2-bd75-5e1377e69243.gif)
+![image](https://user-images.githubusercontent.com/4569866/232485280-4b44a29e-659d-49dd-85d5-8b5700dfcbdd.png)
+> setup browser extension and save settings
 
-> an infinite conversation initiated with prompt: Tell me intelligent joke number one. End your response with a text: "Tell me intelligent joke number (next number)"
+![fourth17-three](https://user-images.githubusercontent.com/4569866/232485641-00bd012e-b0b9-48ce-8b19-2951c12ae5c9.gif)
+> ChatGPT writing infinite smart contracts improving based on its own feedback
 
 ## Installation
 
