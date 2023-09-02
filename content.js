@@ -62,6 +62,7 @@ async function waitResponse() {
 }
 
 async function handleClick(event) {
+  
   const frontResponse = await waitResponse();
 
   const backPrompt =
@@ -92,6 +93,7 @@ async function handleClick(event) {
 }
 
 function sendMessageToBackground(message) {
+  
   return new Promise((resolve) => {
     chrome.runtime.sendMessage(message, (response) => {
       resolve(response);
@@ -100,7 +102,7 @@ function sendMessageToBackground(message) {
 }
 
 function submitPrompt() {
-  document.querySelector("form button > svg.w-4").parentElement.click();
+  document.querySelector("form button svg.w-4").parentElement.parentElement.click();
 }
 
 function writePrompt(text) {
@@ -116,7 +118,9 @@ function writePrompt(text) {
 }
 
 function handleMessageFromBackground(message, sender, sendResponse) {
+  
   setTimeout(() => {
+    
     if (message.action === "generateResponse") {
       waitResponse().then((response) => {
         sendResponse(response);
@@ -141,9 +145,11 @@ function handleMessageFromBackground(message, sender, sendResponse) {
       document.querySelector(selectedTabBtn).innerText;
     if (settings.frontTabTitle === currentTabTitle) {
       const form = document.querySelector("form");
+      
       form.addEventListener("submit", handleClick);
       backTabTitle = result.backTabTitle;
     } else if (settings.backTabTitle == currentTabTitle) {
+      
       chrome.runtime.onMessage.addListener(handleMessageFromBackground);
     }
   });
