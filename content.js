@@ -55,7 +55,7 @@ function waitElement(selector, shouldBePresent = true) {
 }
 
 async function waitResponse() {
-  const sendIcon = "form button > svg.w-4";
+  const sendIcon = "form button svg.w-4";
   await waitElement(sendIcon, false);
   await waitElement(sendIcon, true);
   return Array.from(document.querySelectorAll(".prose")).pop().innerText;
