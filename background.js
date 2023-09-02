@@ -1,6 +1,3 @@
-debugger;
-console.log('background - first');
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   debugger;
     if (message.action === 'findTabByTitle') {
