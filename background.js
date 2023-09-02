@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  debugger;
+ 
     if (message.action === 'findTabByTitle') {
       const targetTitle = message.targetTitle;
       chrome.tabs.query({ title: targetTitle }, (tabs) => {
