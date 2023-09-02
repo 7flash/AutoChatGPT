@@ -7,6 +7,7 @@ let settings = {
   "backSuffix": "",
 };
 
+
 async function getCompletedReadyState() {
   return new Promise((resolve) => {
     if (document.readyState === "complete") {
@@ -131,13 +132,13 @@ function handleMessageFromBackground(message, sender, sendResponse) {
 (async () => {
   await getCompletedReadyState();
 
-  const selectedTabBtn = "div > a.bg-gray-800 > div.absolute";
+  const selectedTabBtn = "ol > li > a.bg-gray-800";
   await waitElement(selectedTabBtn);
 
   chrome.storage.sync.get(Object.keys(settings), async (result) => {
     settings = { ...result };
     const currentTabTitle =
-      document.querySelector(selectedTabBtn).previousElementSibling.innerText;
+      document.querySelector(selectedTabBtn).innerText;
     if (settings.frontTabTitle === currentTabTitle) {
       const form = document.querySelector("form");
       form.addEventListener("submit", handleClick);
